@@ -6,6 +6,9 @@
 + Production URL: <http://p2.dwa15gjr.me>
 
 ## Outside resources
+
+Used foobooks0 project for all my file templates and changed according to my project needs
+
 **HTML help**
 stackoverflow.com
 w3schools.com
