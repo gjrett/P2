@@ -3,10 +3,11 @@
  * This is the script that the form on index.php submits to
  * Its job is to:
  * 1. Get the data from the form request
- * 2. Load the books and then filter them based on the search term
+ * 2. Process the form data and find the week day that matches the input date
  * 3. Store the results in the SESSION
  * 4. Redirect the visitor back to index.php
  */
+
 require 'includes/helpers.php';
 require 'Form.php';
 
@@ -16,13 +17,13 @@ use DWA\Form;
 session_start();
 
 # Instantiate our objects
-
 $form = new Form($_POST);
 
 # Get data from form request
 $month = $form->get('month');
 $day = $form->get('day');
 $year = $form->get('year');
+$checked = $form->has('checked');
 
 # Validate the form data
 $errors = $form->validate([
@@ -33,10 +34,11 @@ $errors = $form->validate([
 
 if (!$form->hasErrors) {
     #Process information
+
     #Add day of the month
     $calcNumber = $day;
 
-    #Add month offset, subtract 1 if the month is Jan or Feb of a leap year
+    #Add month offset
     $monthOffset = [
         'January' => 6,
         'February' => 2,
@@ -115,6 +117,9 @@ if (!$form->hasErrors) {
         6 => 'Saturday',
     ];
     $weekDay = $dayOfWeek[$dayOfWeekNumber];
+    if ($checked) {
+        $birthday = 'HAPPY BIRTHDAY!';
+    }
 }
 # Store our results data in the SESSION so it's available when we redirect back to index.php
 $_SESSION['results'] = [
@@ -123,7 +128,9 @@ $_SESSION['results'] = [
     'month' => $month,
     'day' => $day,
     'year' => $year,
-    'weekDay' => $weekDay
+    'checked' => $checked,
+    'weekDay' => $weekDay,
+    'birthday' => $birthday
 ];
 
 # Redirect back to the form on index.php

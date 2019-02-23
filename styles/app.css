@@ -16,6 +16,7 @@ html {
 }
 
 body {
+    text-align: center;
     /* Default font-size */
     font-size: 1.6rem;
 
@@ -23,10 +24,19 @@ body {
     margin-bottom: 60px;
 }
 
+div {
+    width: 30%;
+    margin: 0 auto;
+}
+
+
 section#main {
-    max-width: 600px;
+    text-align: left;
+    max-width: 400px;
     width: 100%;
     margin: 20px;
+    border: 3px solid blue;
+    padding: 10px;
 }
 
 footer {
@@ -88,34 +98,7 @@ input[type=text] {
 }
 
 .instructions {
-    color:grey;
-    font-size:10px;
-    margin-bottom:10px;
-}
-
-/*----------------------------------------------------
-Books
------------------------------------------------------*/
-input[name=searchTerm] {
-    width: 300px;
-}
-
-ul.books {
-    list-style-type: none;
-    padding: 0;
-}
-
-li.book {
-    border: 1px solid silver;
-    max-width: 300px;
-    margin: 0 0 15px 0;
-    padding: 10px;
-}
-
-.title {
-    font-weight: bold;
-}
-
-.author {
-    font-style: italic;
+    color: grey;
+    font-size: 10px;
+    margin-bottom: 10px;
 }

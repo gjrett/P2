@@ -14,7 +14,9 @@ if (isset($_SESSION['results'])) {
     $day = $results['day'];
     $month = $results['month'];
     $year = $results['year'];
+    $checked = $results['checked'];
     $weekDay = $results['weekDay'];
+    $birthday = $results['birthday'];
 
     # TIP: Because the key values for $results all match the variable names we set them do,
     # we could simplify the above 4 lines using PHP's extract function:

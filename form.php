@@ -30,7 +30,7 @@ class Form
      * Get a value from the request, with the option of including a default
      * if the value is not set.
      */
-    public function get( string $name, string $default = null)
+    public function get(string $name, string $default = null)
     {
         return $this->request[$name] ?? $default;
     }

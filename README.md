@@ -2,24 +2,30 @@
 *Any instructions/notes in italics should be removed from the template before submitting* 
 
 # Project 2
-+ By: *your first and last name*
-+ Production URL: <http://p2.yourdomain.com>
++ By: Greg Retter
++ Production URL: <http://p2.dwa15gjr.me>
 
 ## Outside resources
-*Your list of outside resources go here*
+**HTML help**
+stackoverflow.com
+w3schools.com
+html.com
+
+**Week Day Finder Algorithm**
+
+https://plus.maths.org/content/what-day-week-were-you-born
 
 ## 3 Unique inputs
-*You don't have to list all inputs, just 3 unique ones. The following is an example of what I'd put if my project was the xkcd Password Generator:*
 
-1. *Text input to indicate number of words in password*
-2. *Checkbox to indicate whether to include a number*
-3. *Dropdown to indicate what symbol to include*
+1. *Dropdown to choose a month*
+2. *Text inputs to indicate day number and year*
+3. *Checkbox to indicate whether input date is a birthday*
 
 ## Class
-*List the name of the class(es) you're using, e.g. `Form.php`, `Password.php`, etc.*
+Form.php
 
 ## Code style divergences
-*List any divergences from PSR-1/PSR-2 and course guidelines on code style*
+None
 
 ## Notes for instructor
-*Any notes for me to refer to while grading; if none, omit this section*
+I received the free namescheap domain, so I switched my domain to dwa15gjr.me
