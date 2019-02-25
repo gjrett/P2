@@ -7,6 +7,8 @@
 
 session_start();
 
+$hasErrors = false;
+
 # Get `results` data from session, if available
 if (isset($_SESSION['results'])) {
     $results = $_SESSION['results'];
@@ -17,6 +19,8 @@ if (isset($_SESSION['results'])) {
     $checked = $results['checked'];
     $weekDay = $results['weekDay'];
     $birthday = $results['birthday'];
+    $errors = $results['errors'];
+    $hasErrors = $results['hasErrors'];
 
     # TIP: Because the key values for $results all match the variable names we set them do,
     # we could simplify the above 4 lines using PHP's extract function:

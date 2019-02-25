@@ -28,8 +28,8 @@ $checked = $form->has('checked');
 # Validate the form data
 $errors = $form->validate([
     'month' => 'required',
-    'day' => 'required',
-    'year' => 'required'
+    'day' => 'numeric|min:1|max:31',
+    'year' => 'numeric|min:1900|max:2018'
 ]);
 
 if (!$form->hasErrors) {
@@ -51,7 +51,7 @@ if (!$form->hasErrors) {
         'September' => 4,
         'October' => 6,
         'November' => 2,
-        'December' => 5
+        'December' => 4
     ];
 
     $calcNumber += $monthOffset[$month];
@@ -83,12 +83,15 @@ if (!$form->hasErrors) {
 
     #Add leap year offset
 
-    if (($yearDecade % 2 == 0) && ($yearLastDigit >= 4)) {
+    if (($yearDecade % 2 == 0) && ($yearLastDigit >= 4))
+    {
         $calcNumber += 1;
-        if ($yearLastDigit >= 8) {
+        if ($yearLastDigit >= 8)
+        {
             $calcNumber += 1;
         }
-    } else if ($yearLastDigit >= 2) {
+    }
+    if (($yearDecade % 2 != 0) && ($yearLastDigit >= 2)) {
         $calcNumber += 1;
         if ($yearLastDigit >= 6) {
             $calcNumber += 1;

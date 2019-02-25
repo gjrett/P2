@@ -9,10 +9,10 @@ require 'logic.php';
     <title>Greg's Website</title>
     <meta charset='utf-8'>
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
-          crossorigin="anonymous">
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'
+          rel='stylesheet'
+          integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO'
+          crossorigin='anonymous'>
 
     <link href='/styles/app.css' rel='stylesheet'>
 
@@ -29,6 +29,7 @@ require 'logic.php';
             <fieldset>
                 <label>Select the month<br>
                     <select name='month' size='1' multiple>
+                        <option value='choose'>Choose one...</option>
                         <option value='January'>January</option>
                         <option value='February'>February</option>
                         <option value='March'>March</option>
@@ -47,8 +48,6 @@ require 'logic.php';
                 <label>Enter the day number (must be from 1 - 31, inclusive)<br>
                     <input type='number'
                            name='day'
-                           min='1'
-                           max='31'
                            size='8'
                            autocomplete='off'
                            value='<?= $day ?? '' ?>'>
@@ -56,13 +55,22 @@ require 'logic.php';
 
                 <label>Enter the year number (must be from 1900 - 2018, inclusive)<br>
                     <input type='number'
-                           min='1900'
-                           max='2018'
                            name='year'
                            size='8'
+                           min='1900'
+                           max='2018'
                            autocomplete='off'
                            value='<?= $year ?? '' ?>'>
                 </label>
+
+                <label>
+                    <input type='text'
+                           readonly
+                           name='yearErr'
+                           size='17'
+                           style="border:none"
+                           value='<?= $yearErr ?? '' ?>'>
+                </Label>
 
                 <label>This is my birthday
                     <input type='checkbox' name='checked' <?php if (isset($checked) and $checked) echo 'checked' ?> >
@@ -83,10 +91,21 @@ require 'logic.php';
                        style="border:none"
                        value='<?= $birthday ?? '' ?>'>
             </Label>
-
         </form>
     </section>
 </div>
+
+<?php if ($hasErrors): ?>
+    <div class='errors alert alert-danger'>
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif ?>
+
+
 <footer>
     <a href='https://github.com/gjrett/p2'>View this project on Github</a>
 </footer>

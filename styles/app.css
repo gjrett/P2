@@ -25,18 +25,25 @@ body {
 }
 
 div {
-    width: 30%;
+    width: 33%;
     margin: 0 auto;
 }
 
 
 section#main {
     text-align: left;
-    max-width: 400px;
+    max-width: 425px;
     width: 100%;
     margin: 20px;
     border: 3px solid blue;
     padding: 10px;
+}
+input:invalid {
+    border: 2px solid red;
+
+}
+select:invalid {
+    border: 2px solid red;
 }
 
 footer {

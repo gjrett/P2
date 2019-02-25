@@ -70,6 +70,7 @@ class Form
                     list($rule, $parameter) = explode(':', $rule);
                 }
 
+
                 # Run the validation test with the given rule
                 $test = $this->$rule($value, $parameter);
 
