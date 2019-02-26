@@ -8,6 +8,7 @@
 session_start();
 
 $hasErrors = false;
+$month = null;
 
 # Get `results` data from session, if available
 if (isset($_SESSION['results'])) {

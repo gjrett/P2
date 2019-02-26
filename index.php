@@ -23,35 +23,37 @@ require 'logic.php';
 
 <div>
     <section id='main'>
-
         <form method='POST' action='process.php'>
-
             <fieldset>
                 <label>Select the month<br>
-                    <select name='month' size='1' multiple>
-                        <option value='choose'>Choose one...</option>
-                        <option value='January'>January</option>
-                        <option value='February'>February</option>
-                        <option value='March'>March</option>
-                        <option value='April'>April</option>
-                        <option value='May'>May</option>
-                        <option value='June'>June</option>
-                        <option value='July'>July</option>
-                        <option value='August'>August</option>
-                        <option value='September'>September</option>
-                        <option value='October'>October</option>
-                        <option value='November'>November</option>
-                        <option value='December'>December</option>
+                    <select name='month'>
+                        <option value='' <?php if($month == null) echo 'selected'?>>Choose one...</option>
+                        <option value='January' <?php if($month == 'January') echo 'selected'?>>January</option>
+                        <option value='February' <?php if($month == 'February') echo 'selected'?>>February</option>
+                        <option value='March' <?php if($month == 'March') echo 'selected'?>>March</option>
+                        <option value='April' <?php if($month == 'April') echo 'selected'?>>April</option>
+                        <option value='May' <?php if($month == 'May') echo 'selected'?>>May</option>
+                        <option value='June' <?php if($month == 'June') echo 'selected'?>>June</option>
+                        <option value='July' <?php if($month == 'July') echo 'selected'?>>July</option>
+                        <option value='August' <?php if($month == 'August') echo 'selected'?>>August</option>
+                        <option value='September' <?php if($month == 'September') echo 'selected'?>>September</option>
+                        <option value='October' <?php if($month == 'October') echo 'selected'?>>October</option>
+                        <option value='November' <?php if($month == 'November') echo 'selected'?>>November</option>
+                        <option value='December' <?php if($month == 'December') echo 'selected'?>>December</option>
                     </select>
                 </label>
+                <p><font color="red"><?php if(($hasErrors)&&($month == '')) echo 'MONTH MUST NOT BE BLANK'?></font></p>
 
                 <label>Enter the day number (must be from 1 - 31, inclusive)<br>
                     <input type='number'
                            name='day'
                            size='8'
+                           min='1'
+                           max='31'
                            autocomplete='off'
                            value='<?= $day ?? '' ?>'>
                 </label>
+                <p><font color="red"><?php if(($hasErrors)&&($day == '')) echo 'DAY MUST NOT BE BLANK'?></font></p>
 
                 <label>Enter the year number (must be from 1900 - 2018, inclusive)<br>
                     <input type='number'
@@ -62,15 +64,7 @@ require 'logic.php';
                            autocomplete='off'
                            value='<?= $year ?? '' ?>'>
                 </label>
-
-                <label>
-                    <input type='text'
-                           readonly
-                           name='yearErr'
-                           size='17'
-                           style="border:none"
-                           value='<?= $yearErr ?? '' ?>'>
-                </Label>
+                <p><font color="red"><?php if(($hasErrors)&&($year == '')) echo 'YEAR MUST NOT BE BLANK'?></font></p>
 
                 <label>This is my birthday
                     <input type='checkbox' name='checked' <?php if (isset($checked) and $checked) echo 'checked' ?> >
