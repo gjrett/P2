@@ -21,11 +21,10 @@ class DateInfo
     {
         # Store form data (POST or GET) in a class property called $request
         $this->request = $request;
-        $this-> month = $request['month'];
-        $this-> day = $request['day'];
-        $this-> year = $request['year'];
-        $this-> minDay = 1;
-
+        $this->month = $request['month'];
+        $this->day = $request['day'];
+        $this->year = $request['year'];
+        $this->minDay = 1;
     }
 
     /**
@@ -118,6 +117,7 @@ class DateInfo
                 return true;
             }
         }
+
         return false;
     }
 }

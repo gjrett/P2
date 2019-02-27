@@ -35,7 +35,6 @@ $errors = $form->validate([
     'year' => 'numeric|min:1900|max:2018'
 ]);
 
-
 if (!$form->hasErrors) {
     #Process information
 
@@ -142,18 +141,18 @@ if (!$form->hasErrors) {
     }
 }
 # Store our results data in the SESSION so it's available when we redirect back to index.php
-    $_SESSION['results'] = [
-        'errors' => $errors,
-        'hasErrors' => $form->hasErrors,
-        'month' => $month,
-        'day' => $day,
-        'maxDay' => $maxDay,
-        'dayMaxErr' => $dayMaxErr,
-        'year' => $year,
-        'checked' => $checked,
-        'weekDay' => $weekDay,
-        'birthday' => $birthday
-    ];
+$_SESSION['results'] = [
+    'errors' => $errors,
+    'hasErrors' => $form->hasErrors,
+    'month' => $month,
+    'day' => $day,
+    'maxDay' => $maxDay,
+    'dayMaxErr' => $dayMaxErr,
+    'year' => $year,
+    'checked' => $checked,
+    'weekDay' => $weekDay,
+    'birthday' => $birthday
+];
 
 # Redirect back to the form on index.php
-    header('Location: index.php');
+header('Location: index.php');

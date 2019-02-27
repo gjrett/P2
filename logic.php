@@ -7,6 +7,7 @@
 
 session_start();
 
+#initialize variables
 $hasErrors = false;
 $month = null;
 $dayMaxErr = '';
