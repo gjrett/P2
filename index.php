@@ -40,20 +40,26 @@ require 'logic.php';
                         <option value='October' <?php if($month == 'October') echo 'selected'?>>October</option>
                         <option value='November' <?php if($month == 'November') echo 'selected'?>>November</option>
                         <option value='December' <?php if($month == 'December') echo 'selected'?>>December</option>
-                    </select>
+                    </select><?php if(($hasErrors)&&($month == '')) echo '<font size="1.5" color="red"><--MONTH MUST NOT BE BLANK</font>';?>
                 </label>
-                <p><font color="red"><?php if(($hasErrors)&&($month == '')) echo 'MONTH MUST NOT BE BLANK'?></font></p>
+                <?php if(($hasErrors)&&($month == '')) {
+                    $dayErr=true;
+                    $errMessage = '<--DAY MUST NOT BE BLANK';
+                }?>
+                <?php if(!($dayMaxErr == '')) {
+                    $dayErr = true;
+                    $errMessage = $dayMaxErr;
+                }?>
 
                 <label>Enter the day number (must be from 1 - 31, inclusive)<br>
                     <input type='number'
                            name='day'
                            size='8'
                            min='1'
-                           max='31'
+                           max='<?= $maxDay ?? '' ?>'
                            autocomplete='off'
-                           value='<?= $day ?? '' ?>'>
-                </label>
-                <p><font color="red"><?php if(($hasErrors)&&($day == '')) echo 'DAY MUST NOT BE BLANK'?></font></p>
+                           value='<?= $day ?? '' ?>'
+                </label><font size="1.5" color="red"><?php if($dayErr) echo $errMessage;?></font>
 
                 <label>Enter the year number (must be from 1900 - 2018, inclusive)<br>
                     <input type='number'
@@ -62,9 +68,8 @@ require 'logic.php';
                            min='1900'
                            max='2018'
                            autocomplete='off'
-                           value='<?= $year ?? '' ?>'>
-                </label>
-                <p><font color="red"><?php if(($hasErrors)&&($year == '')) echo 'YEAR MUST NOT BE BLANK'?></font></p>
+                           value='<?= $year ?? '' ?>'
+                </label><?php if(($hasErrors)&&($month == '')) echo '<font size="1.5" color="red"><--YEAR MUST NOT BE BLANK</font>';?>
 
                 <label>This is my birthday
                     <input type='checkbox' name='checked' <?php if (isset($checked) and $checked) echo 'checked' ?> >

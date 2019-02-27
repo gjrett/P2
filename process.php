@@ -10,14 +10,17 @@
 
 require 'includes/helpers.php';
 require 'Form.php';
+require 'DateInfo.php';
 
 use DWA\Form;
+use DWA\DateInfo;
 
 # We'll be storing data in the session, so initiate it
 session_start();
 
 # Instantiate our objects
 $form = new Form($_POST);
+$dateInfo = new DateInfo($_POST);
 
 # Get data from form request
 $month = $form->get('month');
@@ -31,6 +34,7 @@ $errors = $form->validate([
     'day' => 'numeric|min:1|max:31',
     'year' => 'numeric|min:1900|max:2018'
 ]);
+
 
 if (!$form->hasErrors) {
     #Process information
@@ -83,11 +87,9 @@ if (!$form->hasErrors) {
 
     #Add leap year offset
 
-    if (($yearDecade % 2 == 0) && ($yearLastDigit >= 4))
-    {
+    if (($yearDecade % 2 == 0) && ($yearLastDigit >= 4)) {
         $calcNumber += 1;
-        if ($yearLastDigit >= 8)
-        {
+        if ($yearLastDigit >= 8) {
             $calcNumber += 1;
         }
     }
@@ -107,6 +109,13 @@ if (!$form->hasErrors) {
         }
     }
 
+    #get last day of the month to validate day
+    $maxDay = $dateInfo->findMaxDay($month);
+    #Add 1 if it's February of a leap year
+    if (($month == 'February') && ($dateInfo->isLeapYear($year))) {
+        $maxDay += 1;
+    }
+
     #Divide by 7, remainder is day of the week
     $dayOfWeekNumber = ($calcNumber % 7);
 
@@ -120,21 +129,31 @@ if (!$form->hasErrors) {
         6 => 'Saturday',
     ];
     $weekDay = $dayOfWeek[$dayOfWeekNumber];
+
+    #If the input day is past the end of a month, such as 30 for February, clear $weekDay
+    if ($day > $maxDay) {
+        $weekDay = '';
+        $dayMaxErr = '<--DAY INPUT OVER MAX FOR CHOSEN MONTH';
+    }
+
+    #If input date is a birthday, set happy birthday value
     if ($checked) {
         $birthday = 'HAPPY BIRTHDAY!';
     }
 }
 # Store our results data in the SESSION so it's available when we redirect back to index.php
-$_SESSION['results'] = [
-    'errors' => $errors,
-    'hasErrors' => $form->hasErrors,
-    'month' => $month,
-    'day' => $day,
-    'year' => $year,
-    'checked' => $checked,
-    'weekDay' => $weekDay,
-    'birthday' => $birthday
-];
+    $_SESSION['results'] = [
+        'errors' => $errors,
+        'hasErrors' => $form->hasErrors,
+        'month' => $month,
+        'day' => $day,
+        'maxDay' => $maxDay,
+        'dayMaxErr' => $dayMaxErr,
+        'year' => $year,
+        'checked' => $checked,
+        'weekDay' => $weekDay,
+        'birthday' => $birthday
+    ];
 
 # Redirect back to the form on index.php
-header('Location: index.php');
+    header('Location: index.php');
